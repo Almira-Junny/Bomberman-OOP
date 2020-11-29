@@ -6,26 +6,39 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import uet.oop.bomberman.entities.mobile.Bomber;
-import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.object.Grass;
-import uet.oop.bomberman.entities.object.Wall;
+import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.mobile.*;
+import uet.oop.bomberman.entities.object.*;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class    BombermanGame extends Application {
-    
-    public static final int WIDTH = 20;
-    public static final int HEIGHT = 15;
-    
+public class BombermanGame extends Application {
+    public static int WIDTH;
+    public static int HEIGHT;
+    public static int LEVEL;
+
+    public static char[][] mainMap;
+
+    private Bom bom;
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
-    private List<Entity> stillObjects = new ArrayList<>();
+    private Bomber bomber;
 
+    private List<Entity> entities = new ArrayList<>();
+    private List<Entity> dynamicObject = new ArrayList<>();
+    private List<Entity> stillObjects = new ArrayList<>();
+    private List<Grass> grass = new ArrayList<>();
+
+    public BombermanGame() {
+    }
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -33,19 +46,17 @@ public class    BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Tao Canvas
+        createMap();
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
-
-        // Tao root container
         Group root = new Group();
         root.getChildren().add(canvas);
 
-        // Tao scene
         Scene scene = new Scene(root);
-
-        // Them scene vao stage
         stage.setScene(scene);
+        stage.setTitle("Bomberman");
+        stage.getIcons().add(new Image("/textures/gameLogo.png"));
+        stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
 
         AnimationTimer timer = new AnimationTimer() {
@@ -55,36 +66,112 @@ public class    BombermanGame extends Application {
                 update();
             }
         };
+
         timer.start();
+        bomber = new Bomber(1, 1, Sprite.player_right.getFxImage());
 
-        createMap();
+        scene.setOnKeyPressed(ke -> {
 
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        entities.add(bomberman);
+        });
+
+        scene.setOnKeyReleased(ke -> {
+
+        });
+    }
+
+    public void getMapSize(String str) {
+        List<String> mapSize = new ArrayList<>();
+        String size = "";
+        int len = str.length();
+        for (int i = 0; i < len; i++) {
+            size += str.charAt(i);
+            if (str.charAt(i) == ' ' || i == len - 1) {
+                mapSize.add(size.trim());
+                size = "";
+            }
+        }
+        LEVEL = Integer.parseInt(mapSize.get(0));//1
+        HEIGHT = Integer.parseInt(mapSize.get(1));//13
+        WIDTH = Integer.parseInt(mapSize.get(2));//31
+        mainMap = new char[HEIGHT][WIDTH];
+
     }
 
     public void createMap() {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                Entity object;
-                if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
-                    object = new Wall(i, j, Sprite.wall.getFxImage());
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("res/levels/Level1.txt"));
+            getMapSize(lines.get(0));
+            lines.remove(0);
+            AtomicInteger height = new AtomicInteger();
+            lines.forEach(line -> {
+                transferTxtFileToMap(line, height.get());
+                height.incrementAndGet();
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void transferTxtFileToMap(String str, int height) {
+        int length = str.length();
+        Entity object = null;
+        for (int i = 0; i < length; i++) {
+            mainMap[height][i] = str.charAt(i);
+            grass.add(new Grass(i, height, Sprite.grass.getFxImage()));
+            switch (str.charAt(i)) {
+                case '#': {
+                    object = new Wall(i, height, Sprite.wall.getFxImage());
+                    stillObjects.add(object);
+                    break;
                 }
-                else {
-                    object = new Grass(i, j, Sprite.grass.getFxImage());
+                case '*': {
+                    object = new Brick(i, height, Sprite.brick.getFxImage());
+                    stillObjects.add(object);
+                    break;
                 }
-                stillObjects.add(object);
+                case 'x': {
+                    object = new Portal(i, height, Sprite.portal.getFxImage());
+                    stillObjects.add(object);
+                    break;
+                }
+                case '1': {
+                    object = new Balloon(i, height, Sprite.balloom_left1.getFxImage());
+                    dynamicObject.add(object);
+                    break;
+                }
+
+                case '2': {
+                    object = new Oneal(i, height, Sprite.oneal_left1.getFxImage());
+                    dynamicObject.add(object);
+                    break;
+                }
+                case 'f': {
+                    object = new Flame(i, height, Sprite.powerup_flames.getFxImage());
+                    dynamicObject.add(object);
+                    break;
+                }
+                case 's': {
+                    object = new SpeedItem(i, height, Sprite.powerup_speed.getFxImage());
+                    stillObjects.add(object);
+                    break;
+                }
+                default:
+                    object = new Grass(i, height, Sprite.grass.getFxImage());
+                    stillObjects.add(object);
             }
         }
     }
 
     public void update() {
         entities.forEach(Entity::update);
+        bomber.update();
     }
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        grass.forEach(g -> g.render(gc));
         stillObjects.forEach(g -> g.render(gc));
-        entities.forEach(g -> g.render(gc));
+        dynamicObject.forEach(g -> g.render(gc));
+        bomber.render(gc);
     }
 }
