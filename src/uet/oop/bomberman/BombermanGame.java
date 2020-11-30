@@ -9,8 +9,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
-import uet.oop.bomberman.entities.mobile.*;
-import uet.oop.bomberman.entities.object.*;
+import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.mob.*;
+import uet.oop.bomberman.entities.mob.enemy.Balloon;
+import uet.oop.bomberman.entities.mob.enemy.Flame;
+import uet.oop.bomberman.entities.mob.enemy.Oneal;
+import uet.oop.bomberman.entities.tile.*;
+import uet.oop.bomberman.entities.tile.destroyable.BrickTile;
+import uet.oop.bomberman.entities.tile.powerup.SpeedItem;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.IOException;
@@ -25,7 +31,7 @@ public class BombermanGame extends Application {
     public static int HEIGHT;
     public static int LEVEL;
     public static char[][] mainMap;
-    private Bom bom;
+    private Bomb bom;
     private GraphicsContext gc;
     private Canvas canvas;
     private Bomber bomber;
@@ -33,7 +39,7 @@ public class BombermanGame extends Application {
     private List<Entity> entities = new ArrayList<>();
     private List<Entity> dynamicObject = new ArrayList<>();
     private List<Entity> stillObjects = new ArrayList<>();
-    private List<Grass> grass = new ArrayList<>();
+    private List<GrassTile> grass = new ArrayList<>();
 
     public BombermanGame() {
     }
@@ -84,7 +90,7 @@ public class BombermanGame extends Application {
         Entity object = null;
         for (int i = 0; i < length; i++) {
             mainMap[height][i] = str.charAt(i);
-            grass.add(new Grass(i, height, Sprite.grass.getFxImage()));
+            grass.add(new GrassTile(i, height, Sprite.grass.getFxImage()));
             switch (str.charAt(i)) {
                 case '1': {
                     object = new Balloon(i, height, Sprite.balloom_left1.getFxImage());
@@ -97,17 +103,17 @@ public class BombermanGame extends Application {
                     break;
                 }
                 case '#': {
-                    object = new Wall(i, height, Sprite.wall.getFxImage());
+                    object = new WallTile(i, height, Sprite.wall.getFxImage());
                     stillObjects.add(object);
                     break;
                 }
                 case '*': {
-                    object = new Brick(i, height, Sprite.brick.getFxImage());
+                    object = new BrickTile(i, height, Sprite.brick.getFxImage());
                     stillObjects.add(object);
                     break;
                 }
                 case 'x': {
-                    object = new Portal(i, height, Sprite.portal.getFxImage());
+                    object = new PortalTile(i, height, Sprite.portal.getFxImage());
                     stillObjects.add(object);
                     break;
                 }
@@ -123,7 +129,7 @@ public class BombermanGame extends Application {
                     break;
                 }
                 default:
-                    object = new Grass(i, height, Sprite.grass.getFxImage());
+                    object = new GrassTile(i, height, Sprite.grass.getFxImage());
                     stillObjects.add(object);
             }
         }

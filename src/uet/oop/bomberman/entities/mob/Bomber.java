@@ -1,10 +1,11 @@
-package uet.oop.bomberman.entities.mobile;
+package uet.oop.bomberman.entities.mob;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Bomber extends Entity {
     private static Sprite prevSprite = null;
     static private int countdown = 0;
 
-    private List<Bom> bombs = new ArrayList<>();
+    private List<Bomb> bombs = new ArrayList<>();
 
     public Bomber(int x, int y, Image img) {
         super(x, y, img);
@@ -159,7 +160,7 @@ public class Bomber extends Entity {
 
             case SPACE:
             case SHIFT:
-                Bom bom = new Bom(bomber.getX() / Sprite.SCALED_SIZE, bomber.getY() / Sprite.SCALED_SIZE, Sprite.bomb.getFxImage());
+                Bomb bom = new Bomb(bomber.getX() / Sprite.SCALED_SIZE, bomber.getY() / Sprite.SCALED_SIZE, Sprite.bomb.getFxImage());
                 bombs.add(bom);
                 BombermanGame.mainMap[bomber.getY() / Sprite.SCALED_SIZE][bomber.getX() / Sprite.SCALED_SIZE] = 'b';
                 break;

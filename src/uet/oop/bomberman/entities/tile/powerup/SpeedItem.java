@@ -1,13 +1,13 @@
-package uet.oop.bomberman.entities.mobile;
+package uet.oop.bomberman.entities.tile.powerup;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.Entity;
 
-public class Balloon  extends Entity {
-    public Balloon() {
+public class SpeedItem extends Entity {
+    public SpeedItem() {
     }
 
-    public Balloon(int xUnit, int yUnit, Image img) {
+    public SpeedItem(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
     }
 

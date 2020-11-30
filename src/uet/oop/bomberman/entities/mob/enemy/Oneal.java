@@ -1,13 +1,13 @@
-package uet.oop.bomberman.entities.object;
+package uet.oop.bomberman.entities.mob.enemy;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.Entity;
 
-public class SpeedItem extends Entity {
-    public SpeedItem() {
+public class Oneal extends Entity {
+    public Oneal() {
     }
 
-    public SpeedItem(int xUnit, int yUnit, Image img) {
+    public Oneal(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
     }
 
