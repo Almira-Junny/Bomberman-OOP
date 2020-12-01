@@ -13,29 +13,26 @@ public class Doll extends Enemy {
         super(x, y, img, 2.0,100);
         this._ai = new AILow();
         this.MAX_STEPS = Sprite.DEFAULT_SIZE * 2;
+        _direction=_ai.calculateDirection();
     }
 
 
     @Override
     protected void chooseSprite() {
         switch(_direction) {
+            case 0:
             case 1:
-                img = Sprite.doll_right1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.doll_right1.getFxImage(), Sprite.doll_right2.getFxImage(), _animate, 20);
-                }
+                if(_moving)
+                    _sprite = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2, Sprite.doll_right3, _animate, 60);
+                else
+                    _sprite = Sprite.doll_left1;
                 break;
+            case 2:
             case 3:
-                img = Sprite.doll_left1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.doll_left1.getFxImage(), Sprite.doll_left2.getFxImage(), _animate, 20);
-                }
-                break;
-            default:
-                img = Sprite.doll_right1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.doll_right1.getFxImage(), Sprite.doll_right2.getFxImage(), _animate, 20);
-                }
+                if(_moving)
+                    _sprite = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, _animate, 60);
+                else
+                    _sprite = Sprite.doll_left1;
                 break;
         }
     }

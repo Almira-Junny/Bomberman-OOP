@@ -4,7 +4,7 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.mob.Bomber;
 import uet.oop.bomberman.entities.object.Brick;
 import uet.oop.bomberman.entities.object.Grass;
-import uet.oop.bomberman.entities.Item.Portal;
+import uet.oop.bomberman.entities.Item.*;
 import uet.oop.bomberman.entities.object.Wall;
 import uet.oop.bomberman.entities.mob.enemys.*;
 import uet.oop.bomberman.graphics.Sprite;
@@ -59,6 +59,11 @@ public class Map {
                 BombermanGame.changeObjects.add(new Brick(x,y,Sprite.brick.getFxImage()));
                 break;
             }
+            case '1': {
+                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.entities.add(new Balloom(x,y,Sprite.balloom_right1.getFxImage()));
+                break;
+            }
             case '2': {
                 BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
                 BombermanGame.entities.add(new Oneal(x, y, Sprite.oneal_right1.getFxImage()));
@@ -66,29 +71,24 @@ public class Map {
             }
             case '3': {
                 BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
-                BombermanGame.entities.add(new Condoria(x, y, Sprite.kondoria_right1.getFxImage()));
+                BombermanGame.entities.add(new Doll(x, y, Sprite.doll_right1.getFxImage()));
                 break;
             }
 
             case '4': {
                 BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
-                BombermanGame.entities.add(new Doll(x, y, Sprite.doll_right1.getFxImage()));
+                BombermanGame.entities.add(new Minvo(x, y, Sprite.minvo_right1.getFxImage()));
                 break;
             }
 
             case '5': {
                 BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
-                BombermanGame.entities.add(new Minvo(x, y, Sprite.minvo_right1.getFxImage()));
+                BombermanGame.entities.add(new Kondoria(x, y, Sprite.kondoria_right1.getFxImage()));
                 break;
             }
             case 'p': {
                 BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
                 BombermanGame.player = new Bomber(x, y, Sprite.player_right.getFxImage(), BombermanGame.input);
-                break;
-            }
-            case '1': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
-                BombermanGame.entities.add(new Balloom(x,y,Sprite.balloom_right1.getFxImage()));
                 break;
             }
             case ' ': BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage())); break;
@@ -98,8 +98,6 @@ public class Map {
                 BombermanGame.changeObjects.add(new Portal(x, y, Sprite.brick.getFxImage()));
                 break;
             }
-            case 'f': BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage())); break;
-            //case 'x': changeObjects.add(new Portal(x,y,Sprite.portal.getFxImage())); break;
             default: {
                 BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
             }
@@ -123,10 +121,8 @@ public class Map {
             for (int i = 0; i < h; i++) {
                 String s = sc.nextLine();
                 for (int j = 0; j < w; j++) {
-                    //System.out.print(s.charAt(j));
                     addObject(s.charAt(j), j, i);
                 }
-               // System.out.println();
             }
 
             LEVEL = level;

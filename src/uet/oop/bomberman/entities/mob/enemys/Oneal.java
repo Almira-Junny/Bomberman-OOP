@@ -16,7 +16,6 @@ public class Oneal extends Enemy {
         super(x, y, img, 2.0,150);
         this._ai = new AIMedium((Bomber) BombermanGame.player, this);
         _direction  = _ai.calculateDirection();
-        this._speed = 2;
         this.MAX_STEPS = Sprite.DEFAULT_SIZE;
     }
 
@@ -52,25 +51,20 @@ public class Oneal extends Enemy {
     @Override
     protected void chooseSprite() {
         switch(_direction) {
+            case 0:
             case 1:
-                img = Sprite.oneal_right1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.oneal_right1.getFxImage(), Sprite.oneal_right2.getFxImage(), _animate, 20);
-                }
+                if(_moving)
+                    _sprite = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, _animate, 60);
+                else
+                    _sprite = Sprite.oneal_left1;
                 break;
+            case 2:
             case 3:
-                img = Sprite.oneal_left1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.oneal_left1.getFxImage(), Sprite.oneal_left2.getFxImage(), _animate, 20);
-                }
-                break;
-            default:
-                img = Sprite.oneal_right1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.oneal_right1.getFxImage(), Sprite.oneal_right2.getFxImage(), _animate, 20);
-                }
+                if(_moving)
+                    _sprite = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, _animate, 60);
+                else
+                    _sprite = Sprite.oneal_left1;
                 break;
         }
     }
-    
 }

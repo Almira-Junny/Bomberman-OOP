@@ -55,5 +55,4 @@ public class AIMedium extends AI {
         return -1;
     }
 
-
 }

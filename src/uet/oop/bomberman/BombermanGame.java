@@ -27,7 +27,7 @@ import java.util.List;
 
 public class BombermanGame extends Application {
 
-    public static int LEVEL = 1;
+    public static int LEVEL = 5;
 
     protected AnchorPane scoreBoard = null;
     protected VBox v = new VBox();
@@ -149,7 +149,6 @@ public class BombermanGame extends Application {
 
     //kiểm tra chạm wall va bom
     public static Entity getEntity(Rectangle rec) {
-        //System.out.println(stillObjects.size());
         for (int i = 0; i < stillObjects.size(); i++) {
             Entity t = stillObjects.get(i);
             if (t instanceof BomBang) {
@@ -177,7 +176,6 @@ public class BombermanGame extends Application {
 
     //kiểm tra chạm quái
     public static boolean checkCollisionEnemy(Rectangle rec) {
-        //System.out.println(stillObjects.size());
         for (int i = 0; i < entities.size(); i++) {
             Entity t = entities.get(i);
             if (!(t instanceof Bomber)) {

@@ -10,14 +10,15 @@ import uet.oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
 
-public class Condoria extends Enemy {
+public class Kondoria extends Enemy {
 
     protected int _animate = 0;
 
-    public Condoria(int x, int y, Image img) {
-        super(x, y, img, 1.0,100);
+    public Kondoria(int x, int y, Image img) {
+        super(x, y, img, 0.5,150);
         this._ai = new AIMedium((Bomber) BombermanGame.player, this);
-        this.MAX_STEPS = Sprite.DEFAULT_SIZE * 4;
+        _direction  = _ai.calculateDirection();
+        this.MAX_STEPS = Sprite.DEFAULT_SIZE;
     }
 
 

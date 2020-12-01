@@ -9,6 +9,7 @@ import uet.oop.bomberman.entities.Item.FlameItem;
 import uet.oop.bomberman.entities.Item.SpeedItem;
 import uet.oop.bomberman.entities.bomb.BomBang;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.entities.mob.enemys.*;
 
 import java.util.Random;
 
@@ -52,7 +53,6 @@ public class Brick extends Entity {
             this.destroy = true;
         }
     }
-
     public void afterDestroy() {
         int r = generator.nextInt(28);
         if (r == 4) {
@@ -67,6 +67,5 @@ public class Brick extends Entity {
         }
 
         BombermanGame.changeObjects.remove(this);
-        //System.out.println(BombermanGame.changeObjects.size());
     }
 }

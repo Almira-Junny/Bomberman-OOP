@@ -52,12 +52,5 @@ public abstract class Mob extends Entity {
         return _direction;
     }
 
-    /*protected double getXMessage() {
-        return (_x * Game.SCALE) + (_sprite.SIZE / 2 * Game.SCALE);
-    }
-
-    protected double getYMessage() {
-        return (_y* Game.SCALE) - (_sprite.SIZE / 2 * Game.SCALE);
-    }*/
 
 }

@@ -13,30 +13,20 @@ public class Balloom extends Enemy {
     public Balloom(int x, int y, Image img) {
         super(x, y, img, 1.0,100);
         this._ai = new AILow();
-
+        _direction= _ai.calculateDirection();
     }
 
 
     @Override
     protected void chooseSprite() {
         switch(_direction) {
+            case 0:
             case 1:
-                img = Sprite.balloom_right1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.balloom_right1.getFxImage(), Sprite.balloom_right2.getFxImage(), _animate, 20);
-                }
+                _sprite = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2, Sprite.balloom_right3, _animate, 60);
                 break;
+            case 2:
             case 3:
-                img = Sprite.balloom_left1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.balloom_left1.getFxImage(), Sprite.balloom_left2.getFxImage(), _animate, 20);
-                }
-                break;
-            default:
-                img = Sprite.balloom_right1.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.balloom_right1.getFxImage(), Sprite.balloom_right2.getFxImage(), _animate, 20);
-                }
+                _sprite = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2, Sprite.balloom_left3, _animate, 60);
                 break;
         }
     }
