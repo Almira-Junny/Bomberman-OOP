@@ -13,6 +13,8 @@ public class Sprite {
 	public static final int DEFAULT_SIZE = 16;
 	public static final int SCALED_SIZE = DEFAULT_SIZE * 2;
     private static final int TRANSPARENT_COLOR = 0xffff00ff;
+	public static final double PLAYERSPEED = 1.0;
+
 	public final int SIZE;
 	private int _x, _y;
 	public int[] _pixels;
@@ -231,10 +233,24 @@ public class Sprite {
 		return x2;
 	}
 	
-	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
+	/*public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
 		int diff = time / 2;
 		return (animate % time > diff) ? x1 : x2; 
+	}*/
+
+	public static Image movingSprite(Image x1, Image x2, int animate, int time) {
+		int diff = time / 2;
+		return (animate % time > diff) ? x1 : x2;
 	}
+
+	public static Image movingSprite(Image x1, Image x2, Image x3, int t, int l) {
+		if (t < l) return x1;
+		if (t < l * 2) return x2;
+		if (t < l * 3) return x3;
+
+		return null;
+	}
+
 	
 	public int getSize() {
 		return SIZE;
