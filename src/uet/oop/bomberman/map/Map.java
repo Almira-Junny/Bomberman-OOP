@@ -53,53 +53,57 @@ public class Map {
 
     public static void addObject(char c, int x, int y) {
         switch (c) {
-            case '#': BombermanGame.stillObjects.add(new Wall(x,y, Sprite.wall.getFxImage())); break;
+            case '#':
+                BombermanGame.stillObjects.add(new Wall(x, y, Sprite.wall.getFxImage()));
+                break;
             case '*': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
-                BombermanGame.changeObjects.add(new Brick(x,y,Sprite.brick.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
+                BombermanGame.changeObjects.add(new Brick(x, y, Sprite.brick.getFxImage()));
                 break;
             }
             case '1': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
-                BombermanGame.entities.add(new Balloom(x,y,Sprite.balloom_right1.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
+                BombermanGame.entities.add(new Balloom(x, y, Sprite.balloom_right1.getFxImage()));
                 break;
             }
             case '2': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 BombermanGame.entities.add(new Oneal(x, y, Sprite.oneal_right1.getFxImage()));
                 break;
             }
             case '3': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 BombermanGame.entities.add(new Doll(x, y, Sprite.doll_right1.getFxImage()));
                 break;
             }
 
             case '4': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 BombermanGame.entities.add(new Minvo(x, y, Sprite.minvo_right1.getFxImage()));
                 break;
             }
 
             case '5': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 BombermanGame.entities.add(new Kondoria(x, y, Sprite.kondoria_right1.getFxImage()));
                 break;
             }
             case 'p': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 BombermanGame.player = new Bomber(x, y, Sprite.player_right.getFxImage(), BombermanGame.input);
                 break;
             }
-            case ' ': BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage())); break;
+            case ' ':
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
+                break;
             //test
             case 'x': {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 BombermanGame.changeObjects.add(new Portal(x, y, Sprite.brick.getFxImage()));
                 break;
             }
             default: {
-                BombermanGame.stillObjects.add(new Grass(x,y,Sprite.grass.getFxImage()));
+                BombermanGame.stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
             }
         }
     }
@@ -128,7 +132,7 @@ public class Map {
             LEVEL = level;
             HEIGHT = h;
             WIDTH = w;
-        } catch ( IOException e) {
+        } catch (IOException e) {
             System.out.println("lỗi đọc file map");
             System.out.println(e.fillInStackTrace());
         }
