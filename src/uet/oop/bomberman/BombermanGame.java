@@ -196,7 +196,5 @@ public class BombermanGame extends Application {
         }
         return null;
     }
-
-
 }
 

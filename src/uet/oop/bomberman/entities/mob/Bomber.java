@@ -116,7 +116,6 @@ public class Bomber extends Mob {
 
 
         if(xa != 0 || ya != 0)  {
-            //System.out.println(ya);
                 move(xa , ya);
 
             _moving = true;
@@ -160,7 +159,6 @@ public class Bomber extends Mob {
         if (!_alive) return;
 
         this._alive = false;
-
         this.img = Sprite.player_dead1.getFxImage();
 
         reset();

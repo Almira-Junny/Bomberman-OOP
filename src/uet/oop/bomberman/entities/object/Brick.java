@@ -61,11 +61,10 @@ public class Brick extends Entity {
         if (r == 8) {
             BombermanGame.changeObjects.add(new BombItem(x, y, Sprite.powerup_bombs.getFxImage()));
         }
-
         if (r == 12) {
             BombermanGame.changeObjects.add(new SpeedItem(x, y, Sprite.powerup_speed.getFxImage()));
-        }
+       }
 
         BombermanGame.changeObjects.remove(this);
-    }
+   }
 }

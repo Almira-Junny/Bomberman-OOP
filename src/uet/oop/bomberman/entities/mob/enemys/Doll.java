@@ -10,7 +10,7 @@ public class Doll extends Enemy {
     protected int _animate = 0;
 
     public Doll(int x, int y, Image img) {
-        super(x, y, img, 2.0,100);
+        super(x, y, img, 4.0,100);
         this._ai = new AILow();
         this.MAX_STEPS = Sprite.DEFAULT_SIZE * 2;
         _direction=_ai.calculateDirection();
