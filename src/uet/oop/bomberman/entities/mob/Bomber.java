@@ -80,7 +80,8 @@ public class Bomber extends Mob {
             case 1:
                 img = Sprite.player_right.getFxImage();
                 if(_moving) {
-                    img = Sprite.movingSprite(Sprite.player_right_1.getFxImage(), Sprite.player_right_2.getFxImage(), _animate, 20);
+                    img = Sprite.movingSprite(Sprite.player_right_1.getFxImage(),
+                            Sprite.player_right_2.getFxImage(), _animate, 20);
                 }
                 break;
             case 2:
@@ -157,9 +158,12 @@ public class Bomber extends Mob {
     @Override
     public void kill() {
         if (!_alive) return;
+
         this._alive = false;
 
         this.img = Sprite.player_dead1.getFxImage();
+
+        reset();
 
     }
 
@@ -180,6 +184,7 @@ public class Bomber extends Mob {
                 if (((Portal) t).getState() != 2) {
                     return false;
                 } else {
+                    reset();
                     BombermanGame.nextLevel();
                     return true;
                 }
@@ -331,4 +336,9 @@ public class Bomber extends Mob {
         return;
     }
 
+    protected void reset() {
+        speed = 2.0;
+        max_bomb = 1;
+        flame = false;
+    }
 }
