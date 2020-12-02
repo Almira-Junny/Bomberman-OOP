@@ -7,7 +7,7 @@ import uet.oop.bomberman.entities.Entity;
 import java.awt.*;
 
 public  class Item extends Entity {
-    protected int time = -1; // -1 is infinite, duration in lifes
+    protected int time = -1;
     protected boolean _active = false;
     protected int _level;
 

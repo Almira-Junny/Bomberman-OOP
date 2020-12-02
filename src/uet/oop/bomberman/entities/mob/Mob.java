@@ -6,7 +6,6 @@ import uet.oop.bomberman.entities.Entity;
 import java.awt.*;
 
 public abstract class Mob extends Entity {
-    //protected Board _board;
     protected int _direction = -1;
     protected boolean _alive = true;
     protected boolean _moving = false;
@@ -15,7 +14,6 @@ public abstract class Mob extends Entity {
         this.x = x;
         this.y = y;
 
-        //_board = board;
     }
 
     public Mob() {
@@ -26,9 +24,6 @@ public abstract class Mob extends Entity {
 
     @Override
     public abstract void update();
-
-    //@Override
-    //public abstract void render(Screen screen);
 
     protected abstract void calculateMove();
 

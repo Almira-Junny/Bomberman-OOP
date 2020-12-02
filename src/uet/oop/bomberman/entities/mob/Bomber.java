@@ -67,6 +67,13 @@ public class Bomber extends Mob {
         else _animate++;
     }
 
+    // reset properties to default
+    protected void reset() {
+        speed = 2.0;
+        max_bomb = 1;
+        flame = false;
+    }
+
 
     //chọn hình ảnh khi di chuyển
     private void chooseSprite() {
@@ -75,13 +82,6 @@ public class Bomber extends Mob {
                 img = Sprite.player_up.getFxImage();
                 if(_moving) {
                     img = Sprite.movingSprite(Sprite.player_up_1.getFxImage(), Sprite.player_up_2.getFxImage(), _animate, 20);
-                }
-                break;
-            case 1:
-                img = Sprite.player_right.getFxImage();
-                if(_moving) {
-                    img = Sprite.movingSprite(Sprite.player_right_1.getFxImage(),
-                            Sprite.player_right_2.getFxImage(), _animate, 20);
                 }
                 break;
             case 2:
@@ -332,11 +332,5 @@ public class Bomber extends Mob {
         }
         this.rectangle = new Rectangle(x, y , 30, 32);
         return;
-    }
-
-    protected void reset() {
-        speed = 2.0;
-        max_bomb = 1;
-        flame = false;
     }
 }
