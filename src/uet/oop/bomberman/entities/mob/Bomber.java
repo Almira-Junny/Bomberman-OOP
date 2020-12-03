@@ -202,12 +202,10 @@ public class Bomber extends Mob {
                     listBom.add(bom);
                     BombermanGame.stillObjects.add(bom);
                     SoundEffect.sound(SoundEffect.mediaPlayerPlaceBomb);
-                    //SoundEffect.mediaPlayerPlaceBomb.stop();
                 } else {
                     if (checkListBom(bom) == false) {
                         listBom.add(bom);
                         BombermanGame.stillObjects.add(bom);
-                        //GameSound.getInstance().playAudio("BONG_BANG");
                         SoundEffect.sound(SoundEffect.mediaPlayerPlaceBomb);
 
                     }
@@ -257,7 +255,6 @@ public class Bomber extends Mob {
                 listBomBang.get(i).deadLineBomBang();
             } else {
                 listBomBang.remove(i);
-                //GameSound.getInstance().playAudio("BONG_BANG");
                 BombermanGame.stillObjects.remove(t);
             }
         }
@@ -273,7 +270,6 @@ public class Bomber extends Mob {
         }
 
         if (BombermanGame.checkCollisionEnemy(rectangle)) {
-            //System.out.println("player die");
             kill();
             SoundEffect.sound(SoundEffect.mediaPlayerDie);
         }
@@ -283,7 +279,7 @@ public class Bomber extends Mob {
     public void checkItem() {
         Entity t = BombermanGame.checkCollisionItem(this.rectangle);
         if (t instanceof SpeedItem) {
-            speed = 3.0;
+            speed ++;
             ((SpeedItem) t).afterCollision();
             SoundEffect.sound(SoundEffect.mediaPlayerEatItem);
         }
@@ -295,7 +291,7 @@ public class Bomber extends Mob {
         }
 
         if (t instanceof BombItem) {
-            max_bomb = 2;
+            max_bomb ++;
             ((BombItem) t).afterCollision();
             SoundEffect.sound(SoundEffect.mediaPlayerEatItem);
         }

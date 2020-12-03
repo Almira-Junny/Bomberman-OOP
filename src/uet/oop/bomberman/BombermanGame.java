@@ -27,7 +27,7 @@ import java.util.List;
 
 public class BombermanGame extends Application {
 
-    public static int LEVEL = 1;
+    public static int LEVEL = 5;
 
     protected AnchorPane scoreBoard = null;
     protected VBox v = new VBox();

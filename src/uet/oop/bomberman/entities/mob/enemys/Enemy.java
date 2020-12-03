@@ -29,11 +29,10 @@ public abstract class Enemy extends Mob {
     protected int timedead = 60;
     protected int _animate = 0;
 
-    public Enemy(int x, int y , Image img, double speed, int points) {
+    public Enemy(int x, int y , Image img, double speed) {
         this.x = x * Sprite.SCALED_SIZE;
         this.y = y * Sprite.SCALED_SIZE;
         this.img = img;
-        _points = points;
         _speed = speed;
 
         MAX_STEPS = Sprite.DEFAULT_SIZE * 5 / _speed;

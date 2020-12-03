@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.mob.Bomber;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.mob.enemys.ai.AILow;
 import uet.oop.bomberman.entities.object.Wall;
 import uet.oop.bomberman.entities.mob.enemys.ai.AIMedium;
 import uet.oop.bomberman.graphics.Sprite;
@@ -15,8 +16,8 @@ public class Kondoria extends Enemy {
     protected int _animate = 0;
 
     public Kondoria(int x, int y, Image img) {
-        super(x, y, img, 0.5,150);
-        this._ai = new AIMedium((Bomber) BombermanGame.player, this);
+        super(x, y, img, 1);
+        this._ai = new AILow();
         _direction  = _ai.calculateDirection();
         this.MAX_STEPS = Sprite.DEFAULT_SIZE;
     }

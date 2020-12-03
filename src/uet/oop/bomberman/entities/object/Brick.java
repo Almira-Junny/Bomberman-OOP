@@ -54,7 +54,7 @@ public class Brick extends Entity {
         }
     }
     public void afterDestroy() {
-        int r = generator.nextInt(28);
+        int r = generator.nextInt(24);
         if (r == 4) {
             BombermanGame.changeObjects.add(new FlameItem(x, y, Sprite.powerup_flames.getFxImage()));
         }

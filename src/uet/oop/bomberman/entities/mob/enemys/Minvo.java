@@ -11,8 +11,8 @@ public class Minvo extends Enemy {
     protected int _animate = 0;
 
     public Minvo(int x, int y, Image img) {
-        super(x, y, img, 2.0,150);
-        this._ai = new AIMedium((Bomber) BombermanGame.player, this);
+        super(x, y, img, 2.0);
+        this._ai = new AILow();
         _direction  = _ai.calculateDirection();
         this.MAX_STEPS = Sprite.DEFAULT_SIZE;
     }

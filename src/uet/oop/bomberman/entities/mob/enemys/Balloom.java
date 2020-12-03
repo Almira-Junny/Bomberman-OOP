@@ -11,7 +11,7 @@ public class Balloom extends Enemy {
     protected int _animate = 0;
 
     public Balloom(int x, int y, Image img) {
-        super(x, y, img, 1.0,100);
+        super(x, y, img, 1.0);
         this._ai = new AILow();
         _direction= _ai.calculateDirection();
     }

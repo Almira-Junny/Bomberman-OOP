@@ -13,7 +13,7 @@ public class Oneal extends Enemy {
     protected Random random = new Random();
     protected int speedTime = 30;
     public Oneal(int x, int y, Image img) {
-        super(x, y, img, 2.0,150);
+        super(x, y, img, 2.0);
         this._ai = new AIMedium((Bomber) BombermanGame.player, this);
         _direction  = _ai.calculateDirection();
         this.MAX_STEPS = Sprite.DEFAULT_SIZE;
